@@ -6,10 +6,10 @@ defmodule Words do
   """
   @spec count(String.t) :: map()
   def count(sentence) do
-sentence
-      |> String.split(" ")
-      |> Enum.map(fn word -> String.downcase(word) end)
-      |> Enum.group_by(&(&1))
+    sentence
+    |> String.downcase
+    |> extract_words
+    |> count_words
   end
 
   defp extract_words(string), do: Regex.scan(~r/(*UTF)[\p{L}0-9-]+/i, string)

@@ -1,8 +1,8 @@
 var generatedNames = [];
 function generateName() {
   var name = [
-    String.fromCharCode(65 + Math.floor(Math.random() * 25)),
-    String.fromCharCode(65 + Math.floor(Math.random() * 25)),
+    String.fromCharCode(65 + Math.floor(Math.random() * 26)),
+    String.fromCharCode(65 + Math.floor(Math.random() * 26)),
     Math.floor((Math.random() * 10)),
     Math.floor((Math.random() * 10)),
     Math.floor((Math.random() * 10))

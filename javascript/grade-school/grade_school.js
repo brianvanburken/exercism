@@ -3,9 +3,9 @@ var School = function() {
 };
 
 School.prototype.add = function(student, grade) {
-  this.grades[grade] = (this.grades[grade] || []);
-  this.grades[grade].push(student);
-  this.grades[grade] = this.grades[grade].sort();
+  var students = this.grade(grade);
+  students.push(student);
+  this.grades[grade] = students.sort();
 };
 
 School.prototype.grade = function(grade) {

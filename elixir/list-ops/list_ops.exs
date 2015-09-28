@@ -23,10 +23,9 @@ defmodule ListOps do
   @spec filter(list, (any -> as_boolean(term))) :: list
   def filter([], _), do: []
   def filter([head|tail], func) do
-    if func.(head) do
-      [head | filter(tail, func)]
-    else
-      filter(tail, func)
+    cond do
+      func.(head) -> [head | filter(tail, func)]
+      true -> filter(tail, func)
     end
   end
 

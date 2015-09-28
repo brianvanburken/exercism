@@ -1,44 +1,46 @@
 defmodule ListOps do
   # Please don't use any external modules (especially List) in your
-  # implementation. The point of this exercise is to create these basic functions
+  # implementation. The point of this exercise is to create these basic funcs
   # yourself.
   #
-  # Note that `++` is a function from an external module (Kernel, which is
+  # Note that `++` is a func from an external module (Kernel, which is
   # automatically imported) and so shouldn't be used either.
 
   @spec count(list) :: non_neg_integer
-  def count(l) do
-
-  end
+  def count([]), do: 0
+  def count([_|tail]), do: 1 + count(tail)
 
   @spec reverse(list) :: list
-  def reverse(l) do
-
-  end
+  def reverse([]), do: []
+  def reverse(list), do: reverse(list, [])
+  defp reverse([], acc), do: acc
+  defp reverse([head|tail], acc), do: reverse(tail, [head|acc])
 
   @spec map(list, (any -> any)) :: list
-  def map(l, f) do
-
-  end
+  def map([], _), do: []
+  def map([head|tail], func), do: [ func.(head) | map(tail, func) ]
 
   @spec filter(list, (any -> as_boolean(term))) :: list
-  def filter(l, f) do
-
+  def filter([], _), do: []
+  def filter([head|tail], func) do
+    if func.(head) do
+      [head | filter(tail, func)]
+    else
+      filter(tail, func)
+    end
   end
 
   @type acc :: any
   @spec reduce(list, acc, ((any, acc) -> acc)) :: acc
-  def reduce(l, acc, f) do
-
-  end
+  def reduce([], acc, _), do: acc
+  def reduce([head|tail], acc, func), do: reduce(tail, func.(head, acc), func)
 
   @spec append(list, list) :: list
-  def append(a, b) do
-
-  end
+  def append(list, []), do: list
+  def append([], list), do: list
+  def append([head|tail], list), do: [head | append(tail, list)]
 
   @spec concat([[any]]) :: [any]
-  def concat(ll) do
-
-  end
+  def concat([]), do: []
+  def concat([head|tail]), do: append(head, concat(tail))
 end

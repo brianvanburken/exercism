@@ -7,17 +7,13 @@ defmodule Sublist do
   def compare([], _), do: :sublist
   def compare(_, []), do: :superlist
   def compare(list, list), do: :equal
-  def compare(a, b) do
-    cond do
-      length(a) <= length(b) && sublist?(a, b)->
-        :sublist
-      sublist?(b, a) ->
-        :superlist
-      true ->
-        :unequal
-    end
+  def compare(a, b) when length(a) <= length(b) do
+    if sublist?(a, b), do: :sublist, else: :unequal
   end
-  # def compare(_, _), do: :unequal
+  def compare(a, b) when length(a) >= length(b) do
+    if sublist?(b, a), do: :superlist, else: :unequal
+  end
+  def compare(_, _), do: :unequal
 
   defp sublist?(a, b) do
     cond do

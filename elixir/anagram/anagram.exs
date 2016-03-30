@@ -7,7 +7,7 @@ defmodule Anagram do
     word = base |> rearrange
     candidates
     |> Enum.reject(&same?(&1, base))
-    |> Enum.filter(fn x -> word == rearrange(x) end)
+    |> Enum.filter(&(word == rearrange(&1)))
   end
 
   def same?(a, a), do: true

@@ -34,21 +34,18 @@ defmodule DNATest do
     assert DNA.histogram(s) == expected
   end
 
-  @tag :pending
   test "histogram validates the strand" do
     assert_raise ArgumentError, fn ->
       DNA.histogram('JOHNNYAPPLESEED')
     end
   end
 
-  @tag :pending
   test "count validates the nucleotide" do
     assert_raise ArgumentError, fn ->
       DNA.count('', ?U)
     end
   end
 
-  @tag :pending
   test "count validates the strand" do
     assert_raise ArgumentError, fn ->
       DNA.count('JOHNNYAPPLESEED', ?A)

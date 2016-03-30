@@ -13,10 +13,10 @@ defmodule DNA do
   1
   """
   @spec count([char], char) :: non_neg_integer
-  def count([], _nucleotide), do: 0
-  def count(strand, nucleotide) do
-    strand |> nucleotides |> Map.get(nucleotide)
+  def count(strand, nucleotide) when nucleotide in @nucleotides do
+    strand |> validate! |> nucleotides |> Map.get(nucleotide)
   end
+  def count(_strand, _nucleotide), do: raise ArgumentError
 
 
   @doc """
@@ -29,9 +29,13 @@ defmodule DNA do
   """
   @spec histogram([char]) :: map
   def histogram(strand) do
-    strand |> nucleotides
+    strand |> validate! |> nucleotides
   end
 
+  defp validate!(strand) do
+    unless Enum.all?(strand, &(&1 in @nucleotides)), do: raise ArgumentError
+    strand
+  end
 
   defp nucleotides(strand) do
     strand |> Enum.reduce(%{?A => 0, ?T => 0, ?C => 0, ?G => 0}, fn(char, acc) ->

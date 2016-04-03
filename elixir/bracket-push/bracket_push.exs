@@ -15,7 +15,6 @@ defmodule BracketPush do
   defp valid?([ "{" | tail ], acc), do: valid?(tail, [ "}" | acc ])
   defp valid?([ "[" | tail ], acc), do: valid?(tail, [ "]" | acc ])
   defp valid?([ "(" | tail ], acc), do: valid?(tail, [ ")" | acc ])
-
   defp valid?([ x | tail ], [ x | rest ]), do: valid?(tail, rest)
   defp valid?(_, _), do: false
 end

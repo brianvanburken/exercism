@@ -11,7 +11,6 @@ defmodule ListOps do
   def count([_|tail]), do: 1 + count(tail)
 
   @spec reverse(list) :: list
-  def reverse([]), do: []
   def reverse(list), do: reverse(list, [])
   defp reverse([], acc), do: acc
   defp reverse([head|tail], acc), do: reverse(tail, [head|acc])

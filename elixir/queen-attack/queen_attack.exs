@@ -15,21 +15,20 @@ defmodule Queens do
   white and black queen locations shown
   """
   @spec to_string(Queens.t()) :: String.t()
-  def to_string(%Queens{ white: white, black: black}) do
-    "_"
-    |> List.duplicate(8)
-    |> List.duplicate(8)
-    |> place_queen(white, "W")
-    |> place_queen(black, "B")
+  def to_string(queens) do
+    board = for x <- 0..7,
+                y <- 0..7,
+                do: draw(x, y, queens)
+
+    board
+    |> Enum.chunk(8)
     |> Enum.map(&Enum.join(&1, " "))
     |> Enum.join("\n")
   end
 
-  defp place_queen(board, {x, y}, char) do
-    List.update_at board, x, fn(row) ->
-      List.replace_at row, y, char
-    end
-  end
+  defp draw(x, y, %Queens{black: {x, y}}), do: "B"
+  defp draw(x, y, %Queens{white: {x, y}}), do: "W"
+  defp draw(_, _, _), do: "_"
 
   @doc """
   Checks if the queens can attack each other

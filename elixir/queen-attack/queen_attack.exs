@@ -16,19 +16,17 @@ defmodule Queens do
   """
   @spec to_string(Queens.t()) :: String.t()
   def to_string(queens) do
-    board = for x <- 0..7,
-                y <- 0..7,
-                do: draw(x, y, queens)
-
-    board
-    |> Enum.chunk(8)
-    |> Enum.map(&Enum.join(&1, " "))
-    |> Enum.join("\n")
+    for x <- 0..7,
+        y <- 0..7,
+        into: "",
+        do: draw(x, y, queens)
   end
 
-  defp draw(x, y, %Queens{black: {x, y}}), do: "B"
-  defp draw(x, y, %Queens{white: {x, y}}), do: "W"
-  defp draw(_, _, _), do: "_"
+  defp draw(x, y, %Queens{black: {x, y}}), do: "B "
+  defp draw(x, y, %Queens{white: {x, y}}), do: "W "
+  defp draw(7, 7, _), do: "_"
+  defp draw(x, 7, _), do: "_\n"
+  defp draw(_, _, _), do: "_ "
 
   @doc """
   Checks if the queens can attack each other

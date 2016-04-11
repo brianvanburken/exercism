@@ -8,15 +8,9 @@ defmodule Words do
   def count(sentence) do
     sentence
     |> String.downcase
-    |> extract_words
-    |> count_words
+    |> String.split(~r/[!@%$^&* _,:]+/, trim: true)
+    |> Enum.reduce(%{}, &count_words/2)
   end
 
-  defp extract_words(string), do: Regex.scan(~r/(*UTF)[\p{L}0-9-]+/i, string)
-
-  defp count_words(words) do
-    Enum.reduce(words, %{}, fn([word], dict) ->
-      Dict.update(dict, word, 1, &(&1 + 1))
-    end)
-  end
+  defp count_words(word, acc), do: Dict.update(acc, word, 1, &(&1 + 1))
 end

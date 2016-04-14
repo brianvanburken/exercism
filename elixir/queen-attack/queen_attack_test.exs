@@ -77,6 +77,51 @@ _ _ _ _ _ _ _ _
     assert Queens.to_string(queens) == board
   end
 
+  test "queen placed on the bottom right cornet" do
+    queens = Queens.new({4, 3}, {7, 7})
+    board = String.strip """
+_ _ _ _ _ _ _ _
+_ _ _ _ _ _ _ _
+_ _ _ _ _ _ _ _
+_ _ _ _ _ _ _ _
+_ _ _ W _ _ _ _
+_ _ _ _ _ _ _ _
+_ _ _ _ _ _ _ _
+_ _ _ _ _ _ _ B
+    """
+    assert Queens.to_string(queens) == board
+  end
+
+  test "queen placed on the edge of the board" do
+    queens = Queens.new({4, 3}, {2, 7})
+    board = String.strip """
+_ _ _ _ _ _ _ _
+_ _ _ _ _ _ _ _
+_ _ _ _ _ _ _ B
+_ _ _ _ _ _ _ _
+_ _ _ W _ _ _ _
+_ _ _ _ _ _ _ _
+_ _ _ _ _ _ _ _
+_ _ _ _ _ _ _ _
+    """
+    assert Queens.to_string(queens) == board
+  end
+
+  test "queen placed on the start of the board" do
+    queens = Queens.new({4, 3}, {0, 0})
+    board = String.strip """
+B _ _ _ _ _ _ _
+_ _ _ _ _ _ _ _
+_ _ _ _ _ _ _ _
+_ _ _ _ _ _ _ _
+_ _ _ W _ _ _ _
+_ _ _ _ _ _ _ _
+_ _ _ _ _ _ _ _
+_ _ _ _ _ _ _ _
+    """
+    assert Queens.to_string(queens) == board
+  end
+
   # @tag :pending
   test "cannot attack" do
     queens = Queens.new({2, 3}, {4, 7})

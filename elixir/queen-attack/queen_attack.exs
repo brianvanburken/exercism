@@ -2,6 +2,8 @@ defmodule Queens do
   @type t :: %Queens{ black: {integer, integer}, white: {integer, integer} }
   defstruct white: {0, 3}, black: {7, 3}
 
+  @size 7
+
   @doc """
   Creates a new set of Queens
   """
@@ -16,17 +18,24 @@ defmodule Queens do
   """
   @spec to_string(Queens.t()) :: String.t()
   def to_string(queens) do
-    for x <- 0..7,
-        y <- 0..7,
+    for x <- 0..@size,
+        y <- 0..@size,
         into: "",
-        do: draw(x, y, queens)
+        do: draw(x, y, queens) <> closing(x, y, @size)
   end
 
-  defp draw(x, y, %Queens{black: {x, y}}), do: "B "
-  defp draw(x, y, %Queens{white: {x, y}}), do: "W "
-  defp draw(7, 7, _), do: "_"
-  defp draw(x, 7, _), do: "_\n"
-  defp draw(_, _, _), do: "_ "
+  # Outputs the repesentation of the queen or an empty space on the board for the
+  # given position.
+  defp draw(x, y, %Queens{black: {x, y}}), do: "B"
+  defp draw(x, y, %Queens{white: {x, y}}), do: "W"
+  defp draw(_, _, _), do: "_"
+
+  # Outputs the closing character for the position. If the position is the end
+  # of the board in the bottom left it returns an empty string. For edge of the
+  # board it outputs a new line else for all the other position a spacer.
+  defp closing(n, n, n), do: ""
+  defp closing(_, n, n), do: "\n"
+  defp closing(_, _, _), do: " "
 
   @doc """
   Checks if the queens can attack each other

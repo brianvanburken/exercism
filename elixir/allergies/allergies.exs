@@ -1,4 +1,6 @@
 defmodule Allergies do
+  use Bitwise, only: operators
+
   @allergens [
     { "cats", 128 }, { "pollen", 64 }, { "chocolate", 32 }, { "tomatoes", 16 },
     { "strawberries", 8 }, { "shellfish", 4 }, { "peanuts", 2 }, { "eggs", 1}
@@ -20,7 +22,9 @@ defmodule Allergies do
   Returns whether the corresponding flag bit in 'flags' is set for the item.
   """
   @spec allergic_to?(non_neg_integer, String.t) :: boolean
-  def allergic_to?(flags, allergy) do
-    flags |> list |> Enum.any?(&(&1 === allergy))
+  for { allergy, score } <- @allergens do
+    def allergic_to?(flags, unquote(allergy)) do
+      (unquote(score) &&& flags) > 0
+    end
   end
 end

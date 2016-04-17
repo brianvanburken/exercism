@@ -4,14 +4,13 @@ defmodule Anagram do
   """
   @spec match(String.t, [String.t]) :: [String.t]
   def match(base, candidates) do
-    word = base |> rearrange
-    candidates
-    |> Enum.reject(&same?(&1, base))
-    |> Enum.filter(&(word == rearrange(&1)))
+    anagram = base |> rearrange
+    for word <- candidates,
+        String.downcase(word) !== base,
+        anagram === rearrange(word),
+        into: [],
+        do: word
   end
-
-  def same?(a, a), do: true
-  def same?(a, b), do: String.downcase(a) === String.downcase(b)
 
   defp rearrange(word) do
     word |> String.downcase |> String.codepoints |> Enum.sort

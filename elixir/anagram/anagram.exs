@@ -8,7 +8,6 @@ defmodule Anagram do
     for word <- candidates,
         String.downcase(word) !== base,
         anagram === rearrange(word),
-        into: [],
         do: word
   end
 

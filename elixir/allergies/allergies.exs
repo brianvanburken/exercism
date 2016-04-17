@@ -20,6 +20,7 @@ defmodule Allergies do
   Returns whether the corresponding flag bit in 'flags' is set for the item.
   """
   @spec allergic_to?(non_neg_integer, String.t) :: boolean
-  def allergic_to?(flags, "eggs"), do: (1 && flags) > 0
-  def allergic_to?(_, _), do: false
+  def allergic_to?(flags, allergy) do
+    flags |> list |> Enum.any?(&(&1 === allergy))
+  end
 end

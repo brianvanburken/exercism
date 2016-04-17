@@ -71,6 +71,16 @@ defmodule AllergiesTest do
     Allergies.list(509) |> assert_is_a_set_containing(~w[eggs shellfish strawberries tomatoes chocolate pollen cats])
   end
 
+  # @tag :pending
+  test "allergic_to_shellfish_in_addition_to_other_stuff" do
+    assert Allergies.allergic_to?(255, "shellfish")
+  end
+
+  # @tag :pending
+  test "not_allergic_to_chocolate" do
+    refute Allergies.allergic_to?(16, "chocolate")
+  end
+
   defp assert_is_a_set_containing(list, to_contain) do
     set = Enum.into(list, HashSet.new)
     same_contents = to_contain

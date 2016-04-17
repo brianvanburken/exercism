@@ -13,6 +13,6 @@ defmodule Anagram do
   end
 
   defp rearrange(word) do
-    word |> String.downcase |> String.codepoints |> Enum.sort
+    word |> String.downcase |> to_char_list |> Enum.sort
   end
 end

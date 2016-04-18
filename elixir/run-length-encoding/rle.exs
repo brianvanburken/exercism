@@ -9,15 +9,13 @@ defmodule RunLengthEncoder do
   @spec encode(String.t) :: String.t
   def encode(string) do
     Regex.scan(~r{(\w)\1*}, string)
-    |> Enum.map(&compress/1)
-    |> Enum.join
+    |> Enum.map_join(&compress/1)
   end
 
   @spec decode(String.t) :: String.t
   def decode(string) do
     Regex.scan(~r{([0-9]+)([A-Z])}, string)
-    |> Enum.map(&decompress/1)
-    |> Enum.join
+    |> Enum.map_join(&decompress/1)
   end
 
   defp compress([section, character]) do

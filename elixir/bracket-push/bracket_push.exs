@@ -1,5 +1,5 @@
 defmodule BracketPush do
-  @brackets [{"{", "}"}, {"[", "]"}, {"(", ")"}]
+  @brackets [{?{, ?}}, {?[, ?]}, {?(, ?)}]
 
   @doc """
   Checks that all the brackets and braces in the string are matched correctly,
@@ -11,7 +11,7 @@ defmodule BracketPush do
   def check_brackets(str) do
     str
     |> String.replace(~r/[^\{\}\[\]\(\)]/, "")
-    |> String.codepoints
+    |> to_char_list
     |> valid?([])
   end
 

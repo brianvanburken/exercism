@@ -1,5 +1,4 @@
 defmodule BracketPush do
-  @brackets [{"{", "}"}, {"[", "]"}, {"(", ")"}]
 
   @doc """
   Checks that all the brackets and braces in the string are matched correctly,
@@ -7,28 +6,24 @@ defmodule BracketPush do
   will be ignored. Then the string is split into its codepoints and all the
   codepoints are validated for each opening and closing bracket.
   """
-  @spec check_brackets(String.t) :: boolean
-  def check_brackets(str) do
-    str
-    |> String.replace(~r/[^\{\}\[\]\(\)]/, "")
-    |> valid?
-  end
-
   # This function pattern matches on each opening/closing tag by using tail
   # recursion. For each opening bracket its corresponding closing bracket is
-  # pushed to the accumulator. When a closing bracket is encounter it gets matched
-  # with the head of the accumulator. If this matches, it recurses further. If an
-  # incorrect bracket is encountered it doesn't match and ends up with the last
-  # match that returns false. If there is an unclosed bracket it ends up matching
-  # the second function and returns false. If in the end all is well we end up
-  # with and empty binary stringt and empty accumulator list. For this we return
-  # true.
-  defp valid?(string, accumulator \\ [])
-  defp valid?("", []), do: true
-  defp valid?("",  _), do: false
-  for {open, close} <- @brackets do
-    defp valid?(unquote(open) <> tail, acc), do: valid?(tail, [unquote(close) | acc])
+  # pushed to the accumulator. When a closing bracket is encounter it gets
+  # matched with the head of the accumulator. If this matches, it recurses
+  # further. If an incorrect bracket is encountered it doesn't match it returns
+  # false. If there is an unclosed bracket it ends up matching the second
+  # function and returns false. If in the end all is well we end up
+  # with and empty binary string and empty accumulator list. For this we return
+  # true. The last function definition is used to skip unknown characters we do
+  # not parse.
+  @spec check_brackets(String.t) :: boolean
+  def check_brackets(string, accumulator \\ [])
+  def check_brackets("", []), do: true
+  def check_brackets("",  _), do: false
+  def check_brackets(<<x::binary-size(1), tail::binary>>, [ x | rest ]), do: check_brackets(tail, rest)
+  for {open, close} <- [{"{", "}"}, {"[", "]"}, {"(", ")"}] do
+    def check_brackets(unquote(open) <> tail, acc), do: check_brackets(tail, [unquote(close) | acc])
+    def check_brackets(unquote(close) <> _tail,  _), do: false
   end
-  defp valid?(<<x::binary-size(1), tail::binary>>, [ x | rest ]), do: valid?(tail, rest)
-  defp valid?(_, _), do: false
+  def check_brackets(<<_::binary-size(1), tail::binary>>, acc), do: check_brackets(tail, acc)
 end

@@ -8,13 +8,13 @@ defmodule RunLengthEncoder do
   """
   @spec encode(String.t) :: String.t
   def encode(string) do
-    Regex.scan(~r{(\w)\1*}, string)
+    Regex.scan(~r/(\w)\1*/, string)
     |> Enum.map_join(&compress/1)
   end
 
   @spec decode(String.t) :: String.t
   def decode(string) do
-    Regex.scan(~r{([0-9]+)([A-Z])}, string)
+    Regex.scan(~r/([0-9]+)([A-Z])/, string, capture: :all_but_first)
     |> Enum.map_join(&decompress/1)
   end
 
@@ -25,7 +25,7 @@ defmodule RunLengthEncoder do
     |> Kernel.<>(character)
   end
 
-  defp decompress([_section, number, character]) do
+  defp decompress([number, character]) do
     number = String.to_integer(number)
     String.duplicate(character, number)
   end

@@ -1,11 +1,4 @@
 defmodule BracketPush do
-
-  @doc """
-  Checks that all the brackets and braces in the string are matched correctly,
-  and nested correctly. It strips out all the non bracket characters so those
-  will be ignored. Then the string is split into its codepoints and all the
-  codepoints are validated for each opening and closing bracket.
-  """
   # This function pattern matches on each opening/closing tag by using tail
   # recursion. For each opening bracket its corresponding closing bracket is
   # pushed to the accumulator. When a closing bracket is encounter it gets
@@ -16,6 +9,9 @@ defmodule BracketPush do
   # with and empty binary string and empty accumulator list. For this we return
   # true. The last function definition is used to skip unknown characters we do
   # not parse.
+  @doc """
+  Checks that all the brackets and braces in the string are matched correctly, and nested correctly
+  """
   @spec check_brackets(String.t) :: boolean
   def check_brackets(string, accumulator \\ [])
   def check_brackets("", []), do: true

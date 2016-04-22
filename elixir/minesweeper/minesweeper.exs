@@ -6,7 +6,7 @@ defmodule Minesweeper do
   @spec annotate([String.t]) :: [String.t]
   def annotate([]), do: []
   def annotate(board) do
-    board = board |> Enum.map(&String.codepoints/1)
+    board = board |> Enum.map(&to_char_list/1)
     board
     |> Enum.with_index
     |> Enum.map(fn {row, i} ->
@@ -20,7 +20,7 @@ defmodule Minesweeper do
 
   # Do not annotate cells that contain mines. For the other cells it calculates
   # the neighbors and outputs based on the amount.
-  defp annotate_cell("*", _, _), do: "*"
+  defp annotate_cell(?*, _, _), do: "*"
   defp annotate_cell(_, pos, board), do: annotate_neighbors neighbors(pos, board)
 
   # Outputs a space if 0 else the number of neighbors that are mines.
@@ -50,7 +50,7 @@ defmodule Minesweeper do
         col = y + j,
         row >= 0 && row < length(board),
         col >= 0 && col < length(hd(board)),
-        "*" === board |> Enum.at(row) |> Enum.at(col),
+        ?* === board |> Enum.at(row) |> Enum.at(col),
         do: {x, y}
   end
 end

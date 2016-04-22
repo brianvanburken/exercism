@@ -26,8 +26,6 @@ defmodule School do
   """
   @spec sort(map) :: [{integer, [String.t]}]
   def sort(db) do
-    db |> Enum.map(fn({grade, students}) ->
-      { grade, Enum.sort(students) }
-    end)
+    for { grade, students } <- db, do: { grade, Enum.sort(students) }
   end
 end

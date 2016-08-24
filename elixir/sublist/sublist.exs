@@ -3,26 +3,15 @@ defmodule Sublist do
   Returns whether the first list is a sublist or a superlist of the second list
   and if not whether it is equal or unequal to the second list.
   """
-  def compare([], []), do: :equal
-  def compare([], _), do: :sublist
-  def compare(_, []), do: :superlist
-  def compare(list, list), do: :equal
-  def compare(a, b) when length(a) <= length(b) do
-    if sublist?(a, b), do: :sublist, else: :unequal
-  end
-  def compare(a, b) when length(a) >= length(b) do
-    if sublist?(b, a), do: :superlist, else: :unequal
-  end
-  def compare(_, _), do: :unequal
+  def compare(a, a), do: :equal
+  def compare(a, []), do: :superlist
+  def compare([], b), do: :sublist
+  def compare(a, b) when length(a) >= length(b), do: is(b, a, b, :superlist)
+  def compare(a, b), do: is(a, b, a, :sublist)
 
-  defp sublist?(a, b) do
-    cond do
-      length(a) > length(b) ->
-        false
-      a === Enum.take(b, length(a)) ->
-        true
-      true ->
-        sublist?(a, tl(b))
-    end
-  end
+  defp is(_a, _b, [], type), do: type
+  defp is(_a, [], _c, _parameter), do: :unequal
+  defp is(a, b, c, type) when a == b, do: type
+  defp is(a, [hb | tb], [hc | tc], parameter) when hb === hc, do: is(a, tb, tc, parameter)
+  defp is(a, [hb | tb], _c, parameter), do: is(a, tb, a, parameter)
 end

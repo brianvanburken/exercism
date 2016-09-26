@@ -1,4 +1,4 @@
-defmodule DNA do
+defmodule NucleotideCount do
   @nucleotides [?A, ?C, ?G, ?T]
 
   @doc """

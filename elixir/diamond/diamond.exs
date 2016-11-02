@@ -7,8 +7,7 @@ defmodule Diamond do
   def build_shape(letter) do
     letter
     |> char_lines()
-    |> Enum.map(&line(&1, letter - &1))
-    |> Enum.join
+    |> Enum.map_join(&line(&1, letter - &1))
   end
 
   defp line(?A, margin) do
@@ -22,10 +21,7 @@ defmodule Diamond do
     margin_str <> <<char>> <> middle_str <> <<char>> <> margin_str <> "\n"
   end
 
-  defp char_lines(?A) do
-    [?A]
-  end
-
+  defp char_lines(?A), do: [?A]
   defp char_lines(char) do
     left = Enum.to_list(?A..char - 1)
     right = Enum.reverse(left)

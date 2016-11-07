@@ -8,8 +8,8 @@ defmodule Luhn do
     |> String.to_integer()
     |> Integer.digits()
     |> Enum.reverse()
-    |> Enum.with_index()
-    |> Enum.map(&check(&1))
+    |> Stream.with_index()
+    |> Stream.map(&check(&1))
     |> Enum.sum()
   end
 

@@ -8,13 +8,12 @@ defmodule Minesweeper do
   def annotate(board) do
     board = board |> Enum.map(&to_char_list/1)
     board
-    |> Enum.with_index
+    |> Stream.with_index
     |> Enum.map(fn {row, i} ->
       row
-      |> Enum.with_index
-      |> Enum.map_join(fn {cell, j} ->
-        annotate_cell(cell, {i, j}, board)
-      end)
+      |> Stream.with_index
+      |> Stream.map(fn {cell, j} -> annotate_cell(cell, {i, j}, board) end)
+      |> Enum.join
     end)
   end
 

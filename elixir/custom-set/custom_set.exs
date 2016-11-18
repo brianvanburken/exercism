@@ -8,7 +8,7 @@ defmodule CustomSet do
   def new(enumerable), do: %CustomSet{map: Enum.uniq(enumerable)}
 
   @spec empty?(t) :: boolean
-  def empty?(%CustomSet{map: map}) when length(map) == 0, do: true
+  def empty?(%CustomSet{map: []}), do: true
   def empty?(_), do: false
 
   @spec contains?(t, any) :: boolean

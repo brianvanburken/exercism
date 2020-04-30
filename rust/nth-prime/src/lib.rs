@@ -1,12 +1,15 @@
 pub fn nth(n: u32) -> u32 {
-    let mut number = 0;
+    let mut number = 1;
     let mut found_primes = 0;
+    if (n == 0) {
+        return 2;
+    }
     loop {
-        number += 1;
+        number += 2;
         let prime = is_prime(number);
         if prime {
             found_primes += 1;
-            if (found_primes - 1) == n {
+            if found_primes == n {
                 break;
             }
         }

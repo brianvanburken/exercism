@@ -1,5 +1,5 @@
 pub fn raindrops(n: u32) -> String {
-    let mut result = String::from("");
+    let mut result = String::new();
     if n % 3 == 0 {
         result.push_str("Pling")
     }
@@ -10,7 +10,7 @@ pub fn raindrops(n: u32) -> String {
         result.push_str("Plong")
     }
     if n % 3 != 0 && n % 5 != 0 && n % 7 != 0 {
-        result.push_str(&n.to_string())
+        result = n.to_string()
     }
-    result.to_string()
+    result
 }

@@ -279,3 +279,5 @@ gradle-app.setting
 **/build/
 
 # End of https://www.toptal.com/developers/gitignore/api/elm,ruby,elixir,kotlin,python,gradle,rust,exercism
+
+!elixir/**/**/lib/

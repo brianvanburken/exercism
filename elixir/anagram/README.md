@@ -1,48 +1,51 @@
 # Anagram
 
-Write a program that, given a word and a list of possible anagrams, selects the correct sublist.
+Welcome to Anagram on Exercism's Elixir Track.
+If you need help running the tests or submitting your code, check out `HELP.md`.
 
-Given `"listen"` and a list of candidates like `"enlists" "google"
-"inlets" "banana"` the program should return a list containing
-`"inlets"`.
+## Instructions
 
-## Running tests
+An anagram is a rearrangement of letters to form a new word: for example `"owns"` is an anagram of `"snow"`.
+A word is not its own anagram: for example, `"stop"` is not an anagram of `"stop"`.
 
-Execute the tests with:
+Given a target word and a set of candidate words, this exercise requests the anagram set: the subset of the candidates that are anagrams of the target.
 
-```bash
-$ elixir bob_test.exs
-```
+The target and candidates are words of one or more ASCII alphabetic characters (`A`-`Z` and `a`-`z`).
+Lowercase and uppercase characters are equivalent: for example, `"PoTS"` is an anagram of `"sTOp"`, but `StoP` is not an anagram of `sTOp`.
+The anagram set is the subset of the candidate set that are anagrams of the target (in any order).
+Words in the anagram set should have the same letter case as in the candidate set.
 
-(Replace `bob_test.exs` with the name of the test file.)
-
-
-### Pending tests
-
-In the test suites, all but the first test have been skipped.
-
-Once you get a test passing, you can unskip the next one by
-commenting out the relevant `@tag :pending` with a `#` symbol.
-
-For example:
-
-```elixir
-# @tag :pending
-test "shouting" do
-  assert Bob.hey("WATCH OUT!") == "Whoa, chill out!"
-end
-```
-
-Or, you can enable all the tests by commenting out the
-`ExUnit.configure` line in the test suite.
-
-```elixir
-# ExUnit.configure exclude: :pending, trace: true
-```
-
-For more detailed information about the Elixir track, please
-see the [help page](http://exercism.io/languages/elixir).
+Given the target `"stone"` and candidates `"stone"`, `"tones"`, `"banana"`, `"tons"`, `"notes"`, `"Seton"`, the anagram set is `"tones"`, `"notes"`, `"Seton"`.
 
 ## Source
 
-Inspired by the Extreme Startup game [view source](https://github.com/rchatley/extreme_startup)
+### Created by
+
+- @rubysolo
+
+### Contributed to by
+
+- @andrewsardone
+- @angelikatyborska
+- @Br1ght0ne
+- @Cohen-Carlisle
+- @crazymykl
+- @dalexj
+- @devonestes
+- @henrik
+- @jeremy-w
+- @jinyeow
+- @kytrinyx
+- @lpil
+- @markijbema
+- @neenjaw
+- @parkerl
+- @pminten
+- @sotojuan
+- @Teapane
+- @tjcelaya
+- @waiting-for-dev
+
+### Based on
+
+Inspired by the Extreme Startup game - https://github.com/rchatley/extreme_startup

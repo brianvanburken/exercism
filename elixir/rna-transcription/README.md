@@ -1,6 +1,11 @@
-# Rna Transcription
+# RNA Transcription
 
-Write a program that, given a DNA strand, returns its RNA complement (per RNA transcription).
+Welcome to RNA Transcription on Exercism's Elixir Track.
+If you need help running the tests or submitting your code, check out `HELP.md`.
+
+## Instructions
+
+Given a DNA strand, return its RNA complement (per RNA transcription).
 
 Both DNA and RNA strands are a sequence of nucleotides.
 
@@ -18,43 +23,30 @@ each nucleotide with its complement:
 * `T` -> `A`
 * `A` -> `U`
 
-## Running tests
-
-Execute the tests with:
-
-```bash
-$ elixir bob_test.exs
-```
-
-(Replace `bob_test.exs` with the name of the test file.)
-
-
-### Pending tests
-
-In the test suites, all but the first test have been skipped.
-
-Once you get a test passing, you can unskip the next one by
-commenting out the relevant `@tag :pending` with a `#` symbol.
-
-For example:
-
-```elixir
-# @tag :pending
-test "shouting" do
-  assert Bob.hey("WATCH OUT!") == "Whoa, chill out!"
-end
-```
-
-Or, you can enable all the tests by commenting out the
-`ExUnit.configure` line in the test suite.
-
-```elixir
-# ExUnit.configure exclude: :pending, trace: true
-```
-
-For more detailed information about the Elixir track, please
-see the [help page](http://exercism.io/languages/elixir).
-
 ## Source
 
-Rosalind [view source](http://rosalind.info/problems/rna)
+### Created by
+
+- @rubysolo
+
+### Contributed to by
+
+- @angelikatyborska
+- @Cohen-Carlisle
+- @dalexj
+- @devonestes
+- @drueck
+- @jinyeow
+- @lpil
+- @neenjaw
+- @parkerl
+- @pminten
+- @sotojuan
+- @Teapane
+- @tjcelaya
+- @veelenga
+- @waiting-for-dev
+
+### Based on
+
+Hyperphysics - http://hyperphysics.phy-astr.gsu.edu/hbase/Organic/transcription.html

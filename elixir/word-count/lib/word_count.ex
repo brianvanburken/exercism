@@ -13,5 +13,5 @@ defmodule WordCount do
     |> Enum.reduce(%{}, &count_words/2)
   end
 
-  defp count_words(word, acc), do: Dict.update(acc, word, 1, &(&1 + 1))
+  defp count_words(word, acc), do: Map.update(acc, word, 1, &(&1 + 1))
 end

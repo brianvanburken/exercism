@@ -1,54 +1,64 @@
 # Triangle
 
-Write a program that can tell you if a triangle is equilateral, isosceles, or scalene.
+Welcome to Triangle on Exercism's Elixir Track.
+If you need help running the tests or submitting your code, check out `HELP.md`.
 
-The program should raise an error if the triangle cannot exist.
+## Instructions
 
-Tests are provided, delete one `skip` at a time.
+Determine if a triangle is equilateral, isosceles, or scalene.
 
-## Hint
+An _equilateral_ triangle has all three sides the same length.
 
-The sum of the lengths of any two sides of a triangle always exceeds the
-length of the third side, a principle known as the _triangle
-inequality_.
+An _isosceles_ triangle has at least two sides the same length. (It is sometimes
+specified as having exactly two sides the same length, but for the purposes of
+this exercise we'll say at least two.)
 
-## Running tests
+A _scalene_ triangle has all sides of different lengths.
 
-Execute the tests with:
+## Note
 
-```bash
-$ elixir bob_test.exs
+For a shape to be a triangle at all, all sides have to be of length > 0, and the sum of the lengths of any two sides must be greater than or equal to the length of the third side.
+
+In equations:
+
+Let `a`, `b`, and `c` be sides of the triangle. Then all three of the following expressions must be true:
+
+```text
+a + b ≥ c
+b + c ≥ a
+a + c ≥ b
 ```
 
-(Replace `bob_test.exs` with the name of the test file.)
+See [Triangle Inequality](https://en.wikipedia.org/wiki/Triangle_inequality).
 
+## Dig Deeper
 
-### Pending tests
-
-In the test suites, all but the first test have been skipped.
-
-Once you get a test passing, you can unskip the next one by
-commenting out the relevant `@tag :pending` with a `#` symbol.
-
-For example:
-
-```elixir
-# @tag :pending
-test "shouting" do
-  assert Bob.hey("WATCH OUT!") == "Whoa, chill out!"
-end
-```
-
-Or, you can enable all the tests by commenting out the
-`ExUnit.configure` line in the test suite.
-
-```elixir
-# ExUnit.configure exclude: :pending, trace: true
-```
-
-For more detailed information about the Elixir track, please
-see the [help page](http://exercism.io/languages/elixir).
+The case where the sum of the lengths of two sides _equals_ that of the
+third is known as a _degenerate_ triangle - it has zero area and looks like
+a single line. Feel free to add your own code/tests to check for degenerate triangles.
 
 ## Source
 
-The Ruby Koans triangle project, parts 1 & 2 [view source](http://rubykoans.com)
+### Created by
+
+- @rubysolo
+
+### Contributed to by
+
+- @andrewsardone
+- @angelikatyborska
+- @Cohen-Carlisle
+- @dalexj
+- @devonestes
+- @jinyeow
+- @lpil
+- @neenjaw
+- @parkerl
+- @ryanzidago
+- @sotojuan
+- @Teapane
+- @waiting-for-dev
+
+### Based on
+
+The Ruby Koans triangle project, parts 1 & 2 - http://rubykoans.com

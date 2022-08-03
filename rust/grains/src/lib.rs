@@ -6,9 +6,5 @@ pub fn square(s: u32) -> u64 {
 }
 
 pub fn total() -> u64 {
-    let mut sum = 0;
-    for n in 1..65 {
-        sum += square(n);
-    }
-    sum
+    u64::max_value()
 }

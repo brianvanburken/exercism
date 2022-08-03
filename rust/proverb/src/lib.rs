@@ -1,23 +1,14 @@
+use std::iter::once;
+
 pub fn build_proverb(list: &[&str]) -> String {
-    if list.len() == 0 {
-        return String::new();
-    }
+    let closing_sentence = match list.first() {
+        None => String::new(),
+        Some(word) => format!("And all for the want of a {}.", word),
+    };
 
-    let closing_sentence = format!(
-        "And all for the want of a {}.",
-        list.first().expect("Expected a non-empty list")
-    );
-
-    if list.len() == 1 {
-        return closing_sentence;
-    }
-
-    let riddle = list
-        .iter()
-        .zip(list.iter().skip(1))
-        .map(|(a, b)| format!("For want of a {} the {} was lost.", a, b))
-        .collect::<Vec<_>>()
-        .join("\n");
-
-    riddle + "\n" + &closing_sentence
+    return list
+        .windows(2)
+        .map(|w| format!("For want of a {} the {} was lost.\n", w[0], w[1]))
+        .chain(once(closing_sentence))
+        .collect();
 }

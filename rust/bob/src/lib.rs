@@ -5,15 +5,11 @@ pub fn reply(message: &str) -> &str {
     let is_yelling = trimmed_message.to_uppercase() == trimmed_message
         && trimmed_message.to_lowercase() != trimmed_message;
 
-    if is_empty {
-        "Fine. Be that way!"
-    } else if is_yelling && is_question {
-        "Calm down, I know what I'm doing!"
-    } else if is_yelling {
-        "Whoa, chill out!"
-    } else if is_question {
-        "Sure."
-    } else {
-        "Whatever."
+    match (is_empty, is_yelling, is_question) {
+        (true, _, _) => "Fine. Be that way!",
+        (_, true, true) => "Calm down, I know what I'm doing!",
+        (_, true, _) => "Whoa, chill out!",
+        (_, _, true) => "Sure.",
+        (_, _, _) => "Whatever.",
     }
 }

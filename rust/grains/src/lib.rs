@@ -6,5 +6,5 @@ pub fn square(s: u32) -> u64 {
 }
 
 pub fn total() -> u64 {
-    u64::max_value()
+    u64::MAX
 }

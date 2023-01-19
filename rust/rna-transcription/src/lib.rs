@@ -10,9 +10,10 @@ impl Dna {
             .chars()
             .position(|c| !allowed_dna_nucleotides.contains(&c))
         {
-            return Err(index);
+            Err(index)
+        } else {
+            Ok(Dna(dna.to_owned()))
         }
-        Ok(Dna(dna.to_owned()))
     }
 
     pub fn into_rna(self) -> Rna {
@@ -41,8 +42,9 @@ impl Rna {
             .chars()
             .position(|c| !allowed_rna_nucleotides.contains(&c))
         {
-            return Err(index);
+            Err(index)
+        } else {
+            Ok(Rna(rna.to_owned()))
         }
-        Ok(Rna(rna.to_owned()))
     }
 }

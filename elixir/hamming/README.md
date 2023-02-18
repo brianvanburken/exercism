@@ -1,77 +1,53 @@
 # Hamming
 
-Write a program that can calculate the Hamming difference between two DNA strands.
+Welcome to Hamming on Exercism's Elixir Track.
+If you need help running the tests or submitting your code, check out `HELP.md`.
 
-A mutation is simply a mistake that occurs during the creation or
-copying of a nucleic acid, in particular DNA. Because nucleic acids are
-vital to cellular functions, mutations tend to cause a ripple effect
-throughout the cell. Although mutations are technically mistakes, a very
-rare mutation may equip the cell with a beneficial attribute. In fact,
-the macro effects of evolution are attributable by the accumulated
-result of beneficial microscopic mutations over many generations.
+## Instructions
 
-The simplest and most common type of nucleic acid mutation is a point
-mutation, which replaces one base with another at a single nucleotide.
+Calculate the Hamming Distance between two DNA strands.
 
-By counting the number of differences between two homologous DNA strands
-taken from different genomes with a common ancestor, we get a measure of
-the minimum number of point mutations that could have occurred on the
-evolutionary path between the two strands.
+Your body is made up of cells that contain DNA. Those cells regularly wear out and need replacing, which they achieve by dividing into daughter cells. In fact, the average human body experiences about 10 quadrillion cell divisions in a lifetime!
 
-This is called the 'Hamming distance'.
+When cells divide, their DNA replicates too. Sometimes during this process mistakes happen and single pieces of DNA get encoded with the incorrect information. If we compare two strands of DNA and count the differences between them we can see how many mistakes occurred. This is known as the "Hamming Distance".
 
-It is found by comparing two DNA strands and counting how many of the
-nucleotides are different from their equivalent in the other string.
+We read DNA using the letters C,A,G and T. Two strands might look like this:
 
     GAGCCTACTAACGGGAT
     CATCGTAATGACGGCCT
     ^ ^ ^  ^ ^    ^^
 
-The Hamming distance between these two DNA strands is 7.
+They have 7 differences, and therefore the Hamming Distance is 7.
 
-# Implementation notes
+The Hamming Distance is useful for lots of things in science, not just biology, so it's a nice phrase to be familiar with :)
 
-The Hamming distance is only defined for sequences of equal length. This means
-that based on the definition, each language could deal with getting sequences
-of equal length differently.
+## Implementation notes
 
-## Running tests
-
-Execute the tests with:
-
-```bash
-$ elixir bob_test.exs
-```
-
-(Replace `bob_test.exs` with the name of the test file.)
-
-
-### Pending tests
-
-In the test suites, all but the first test have been skipped.
-
-Once you get a test passing, you can unskip the next one by
-commenting out the relevant `@tag :pending` with a `#` symbol.
-
-For example:
-
-```elixir
-# @tag :pending
-test "shouting" do
-  assert Bob.hey("WATCH OUT!") == "Whoa, chill out!"
-end
-```
-
-Or, you can enable all the tests by commenting out the
-`ExUnit.configure` line in the test suite.
-
-```elixir
-# ExUnit.configure exclude: :pending, trace: true
-```
-
-For more detailed information about the Elixir track, please
-see the [help page](http://exercism.io/languages/elixir).
+The Hamming distance is only defined for sequences of equal length, so
+an attempt to calculate it between sequences of different lengths should
+not work.
 
 ## Source
 
-The Calculating Point Mutations problem at Rosalind [view source](http://rosalind.info/problems/hamm/)
+### Created by
+
+- @Teapane
+
+### Contributed to by
+
+- @angelikatyborska
+- @Cohen-Carlisle
+- @dalexj
+- @devonestes
+- @jedschneider
+- @lpil
+- @neenjaw
+- @parkerl
+- @percygrunwald
+- @sotojuan
+- @veelenga
+- @waiting-for-dev
+
+### Based on
+
+The Calculating Point Mutations problem at Rosalind - http://rosalind.info/problems/hamm/

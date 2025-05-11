@@ -5,22 +5,13 @@ defmodule TopSecret do
       |> Code.string_to_quoted()
       |> elem(1)
 
-  def decode_secret_message_part(
-        {kind, _meta, [{:when, _, [fun_def, _cond]}, _]} = ast,
-        acc
-      )
-      when kind in [:def, :defp],
-      do: {ast, [extract_name(fun_def) | acc]}
-
-  def decode_secret_message_part(
-        {kind, _meta, [fun_def, _]} = ast,
-        acc
-      )
+  def decode_secret_message_part({kind, _, [fun_def, _]} = ast, acc)
       when kind in [:def, :defp],
       do: {ast, [extract_name(fun_def) | acc]}
 
   def decode_secret_message_part(ast, acc), do: {ast, acc}
 
+  defp extract_name({:when, _, [fun_def, _]}), do: extract_name(fun_def)
   defp extract_name({_, _, nil}), do: ""
   defp extract_name({_, _, []}), do: ""
   defp extract_name({name, _, args}), do: name |> to_string() |> String.slice(0, length(args))
@@ -30,10 +21,12 @@ defmodule TopSecret do
     string
     |> to_ast()
     |> flatten_ast()
-    |> Enum.reduce("", fn node, acc ->
-      {_, [name]} = decode_secret_message_part(node, [])
-      acc <> name
+    |> Enum.reduce([], fn node, acc ->
+      {_, new_acc} = decode_secret_message_part(node, acc)
+      new_acc
     end)
+    |> Enum.reverse()
+    |> IO.iodata_to_binary()
   end
 
   defp flatten_ast({:__block__, _, body}), do: Enum.flat_map(body, &flatten_ast/1)

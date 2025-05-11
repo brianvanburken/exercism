@@ -37,53 +37,79 @@ defmodule TopSecretTest do
       end
       """
 
-      ast = {
-        :defmodule,
-        [line: 1],
-        [
-          {:__aliases__, [line: 1], [:List]},
-          [
-            do: {
-              :__block__,
-              [],
-              [
-                {:@, [line: 2],
+      assert {
+               :defmodule,
+               [line: 1],
+               [
+                 {:__aliases__, [line: 1], [:List]},
                  [
-                   {:spec, [line: 2],
-                    [{:"::", [line: 2], [{:delete, [line: 2], [[], {:any, [line: 2], nil}]}, []]}]}
-                 ]},
-                {:@, [line: 3],
-                 [
-                   {:spec, [line: 3],
-                    [
-                      {:"::", [line: 3],
-                       [
-                         {:delete, [line: 3], [[{:..., [line: 3], []}], {:any, [line: 3], nil}]},
-                         {:list, [line: 3], nil}
-                       ]}
-                    ]}
-                 ]},
-                {:def, [line: 4],
-                 [{:delete, [line: 4], [{:list, [line: 4], nil}, {:element, [line: 4], nil}]}]}
-              ]
-            }
-          ]
-        ]
-      }
-
-      assert TopSecret.to_ast(string) == ast
+                   do: {
+                     :__block__,
+                     [],
+                     [
+                       {:@, [line: 2],
+                        [
+                          {:spec, [line: 2],
+                           [
+                             {:"::", [line: 2],
+                              [{:delete, [line: 2], [[], {:any, [line: 2], nil}]}, []]}
+                           ]}
+                        ]},
+                       {:@, [line: 3],
+                        [
+                          {:spec, [line: 3],
+                           [
+                             {:"::", [line: 3],
+                              [
+                                {:delete, [line: 3],
+                                 [[{:..., [line: 3], _nil_or_empty_list}], {:any, [line: 3], nil}]},
+                                {:list, [line: 3], nil}
+                              ]}
+                           ]}
+                        ]},
+                       {:def, [line: 4],
+                        [
+                          {:delete, [line: 4],
+                           [{:list, [line: 4], nil}, {:element, [line: 4], nil}]}
+                        ]}
+                     ]
+                   }
+                 ]
+               ]
+             } = TopSecret.to_ast(string)
     end
   end
 
   describe "decode_secret_message_part/2" do
     @tag task_id: 2
-    test "returns the AST and accumulator unchanged" do
+    test "returns the AST and accumulator unchanged (function call)" do
       string = "2 + 3"
       ast = TopSecret.to_ast(string)
       acc = ["le", "mo"]
 
       {actual_ast, actual_acc} = TopSecret.decode_secret_message_part(ast, acc)
       assert actual_ast == ast
+      assert actual_acc == acc
+    end
+
+    @tag task_id: 2
+    test "returns the AST and accumulator unchanged (literal values)" do
+      acc = ["abc"]
+
+      {actual_ast, actual_acc} = TopSecret.decode_secret_message_part(12, acc)
+      assert actual_ast == 12
+      assert actual_acc == acc
+
+      {actual_ast, actual_acc} = TopSecret.decode_secret_message_part(true, acc)
+      assert actual_ast == true
+      assert actual_acc == acc
+
+      {actual_ast, actual_acc} = TopSecret.decode_secret_message_part(:ok, acc)
+      assert actual_ast == :ok
+      assert actual_acc == acc
+
+      {actual_ast, actual_acc} = TopSecret.decode_secret_message_part("meh", acc)
+      assert actual_ast == "meh"
       assert actual_acc == acc
     end
 
